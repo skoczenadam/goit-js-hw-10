@@ -29,13 +29,13 @@ inputCountry.addEventListener("change", () => {
 });
 
 function fetchCountries() {
-return fetch(`https://restcountries.com/v3.1/name/poland`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(response.status);
-        }
-        return response.json()
-    }).catch(error => console.log("Error: ", error));
+    return fetch(`https://restcountries.com/v3.1/name/poland`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status);
+            }
+            return response.json()
+        }).catch(error => console.log("Error: ", error));
 };
 
 function renderCountries(countries) {
