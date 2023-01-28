@@ -1,4 +1,5 @@
 import './css/common.css';
+import { fetchCountries } from './fetchCountries';
 import Notiflix from 'notiflix';
 var debounce = require('lodash.debounce');
 
@@ -7,13 +8,9 @@ const countryList = document.querySelector(".country-list");
 
 const DEBOUNCE_DELAY = 300;
 
-// inputCountry.addEventListener("change", () => {
-//     fetch(`https://restcountries.com/v3.1/name/peru`);
-// });
+console.log('start');
 
-console.log('star1t');
-
-// fetch(`https://jsonplaceholder.typicode.com/posts`, {
+// fetch(`https://restcountries.com/v3.1/name/brasil`, {
 //     method: 'GET',
     
 // })
@@ -21,31 +18,26 @@ console.log('star1t');
 //     .then(response => console.log(response))
 //     .catch(error => console.log("Error: ", error));
 
-inputCountry.addEventListener("change", () => {
-    fetchCountries()
-      .then(countries => console.log("costa"))
+inputCountry.addEventListener("input", () => {
+    let countryName = inputCountry.value
+    fetchCountries(countryName)
       .then(countries => renderCountries(countries))
-      .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            Notiflix.Notify.failure('Oops, there is no country in this name');
+        });
 });
-
-function fetchCountries() {
-    return fetch(`https://restcountries.com/v3.1/name/poland`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(response.status);
-            }
-            return response.json()
-        }).catch(error => console.log("Error: ", error));
-};
 
 function renderCountries(countries) {
     const markup = countries
         .map((country) => {
+        const countryLang = Object.values(country.languages);
           return `<li>
           <p><b>Name</b>: ${country.name.common}</p>
           <p><b>Flag</b>: <img src="${country.flags.svg}"/></p>
           <p><b>Capital</b>: ${country.capital}</p>
-          <p><b>Language</b>: ${country.translation}</p>
+          <p><b>Languages</b>: ${countryLang}</p>
+          <p><b>Population</b>: ${country.population}</p>
         </li>`;
         })
         .join("");
