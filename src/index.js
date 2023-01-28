@@ -1,6 +1,6 @@
+import './css/common.css';
 import Notiflix from 'notiflix';
 var debounce = require('lodash.debounce');
-import './css/styles.css';
 
 const inputCountry = document.querySelector("#search-box");
 const countryList = document.querySelector(".country-list");
@@ -11,7 +11,7 @@ const DEBOUNCE_DELAY = 300;
 //     fetch(`https://restcountries.com/v3.1/name/peru`);
 // });
 
-console.log('start');
+console.log('star1t');
 
 // fetch(`https://jsonplaceholder.typicode.com/posts`, {
 //     method: 'GET',
@@ -22,10 +22,10 @@ console.log('start');
 //     .catch(error => console.log("Error: ", error));
 
 inputCountry.addEventListener("change", () => {
-  fetchCountries()
-    .then(countries => renderCountries(countries))
-    // .then(countries => console.log(countries))
-    .catch(error => console.log(error));
+    fetchCountries()
+      .then(countries => console.log("costa"))
+      .then(countries => renderCountries(countries))
+      .catch(error => console.log(error));
 });
 
 function fetchCountries() {
@@ -45,7 +45,7 @@ function renderCountries(countries) {
           <p><b>Name</b>: ${country.name.common}</p>
           <p><b>Flag</b>: <img src="${country.flags.svg}"/></p>
           <p><b>Capital</b>: ${country.capital}</p>
-          <p><b>Language</b>: ${country.languages}</p>
+          <p><b>Language</b>: ${country.translation}</p>
         </li>`;
         })
         .join("");
