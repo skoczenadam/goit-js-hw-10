@@ -1,5 +1,5 @@
 import './css/common.css';
-// import { fetchCountries } from './fetchCountries';
+import { fetchCountries } from './fetchCountries';
 import Notiflix from 'notiflix';
 var debounce = require('lodash.debounce');
 
@@ -8,7 +8,7 @@ const countryList = document.querySelector(".country-list");
 
 const DEBOUNCE_DELAY = 300;
 
-console.log('start321');
+console.log('start123');
 
 // fetch(`https://restcountries.com/v3.1/name/brasil`, {
 //     method: 'GET',
