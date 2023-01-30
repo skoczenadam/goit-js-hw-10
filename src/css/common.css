@@ -7,7 +7,7 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #a5a4af;
+  background-color: #e0def3;
   color: #212121;
   line-height: 1.5;
 }
@@ -30,4 +30,29 @@ img {
   left: 3px;
   width: 30px;
   height: 30px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+p {
+  position: relative;
+  left: -40px;
+  font-weight: 600;
+}
+
+span {
+  position: relative;
+  left: 15px;
+}
+
+h1 {
+  position: relative;
+  left: -40px;
+}
+
+h1 span {
+  position: relative;
+  top: 5px;
 }
