@@ -18,17 +18,9 @@ const promiseChecker = (isFulfilled, delay) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (isFulfilled) {
-        resolve(iziToast.show({
-          message: `✅ Fulfilled promise in ${delay}ms`,
-          color: 'green',
-          position: 'topRight'
-        }));
+        resolve(delay);
       } else {
-        reject(iziToast.show({
-          message: `❌ Rejected promise in ${delay}ms`,
-          color: 'red',
-          position: 'topRight'
-        }))
+        reject(delay)
       };
     }, delay)
   });
@@ -41,7 +33,17 @@ const formChecker = e => {
   } else {
     radio = false;
   }
-  promiseChecker(radio, input.value);
+  promiseChecker(radio, input.value)
+    .then(delay => iziToast.show({
+          message: `✅ Fulfilled promise in ${delay}ms`,
+          color: 'green',
+          position: 'topRight'
+    }))
+    .catch(delay => iziToast.show({
+          message: `❌ Rejected promise in ${delay}ms`,
+          color: 'red',
+          position: 'topRight'
+        }))
   reset();
 }
 
