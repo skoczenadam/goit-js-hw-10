@@ -6,29 +6,43 @@ const input = document.querySelector(`input[type="number"]`);
 const fulfilled = document.querySelector(`input[value="fulfilled"]`);
 const rejected = document.querySelector(`input[value="rejected"]`);
 
-const formChecker = e => {
-  e.preventDefault();
-  const inputTime = input.value;
-  if (fulfilled.checked) {
-    setTimeout(() => {
-      iziToast.show({
-        message: `✅ Fulfilled promise in ${inputTime}ms`,
-        color: 'green',
-        position: 'topRight'
-      })
-    }, inputTime);
-  } else if (rejected.checked) {
-    setTimeout(() => {
-      iziToast.show({
-        message: `❌ Rejected promise in ${inputTime}ms`,
-        color: 'red',
-        position: 'topRight'
-      })
-    }, inputTime);
-  }
+const reset = () => {
   input.value = "";
   fulfilled.checked = false;
   rejected.checked = false;
+};
+
+let radio;
+
+const promiseChecker = (isFulfilled, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isFulfilled) {
+        resolve(iziToast.show({
+          message: `✅ Fulfilled promise in ${delay}ms`,
+          color: 'green',
+          position: 'topRight'
+        }));
+      } else {
+        reject(iziToast.show({
+          message: `❌ Rejected promise in ${delay}ms`,
+          color: 'red',
+          position: 'topRight'
+        }))
+      };
+    }, delay)
+  });
+}
+
+const formChecker = e => {
+  e.preventDefault();
+  if (fulfilled.checked) {
+    radio = true;
+  } else {
+    radio = false;
+  }
+  promiseChecker(radio, input.value);
+  reset();
 }
 
 form.addEventListener("submit", formChecker)
