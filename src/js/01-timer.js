@@ -52,6 +52,9 @@ const options = {
         position: 'topRight'
       })
     } else {
+      if (userSelectedDate !== 0) {
+        return
+      }
       startTimer.disabled = false;
       userSelectedDate = selectedDates[0].getTime() - date.getTime();
     }
